@@ -2,10 +2,10 @@ from django.db import models
 
 class Service(models.Model):
     name = models.CharField()
-    price = models.IntegerField()
+    price = models.DecimalField(max_digits=10, decimal_places=2)
 
     def __str__(self):
-        return self.name
+        return f"{self.name}"
 
 class OrderLine(models.Model):
     order = models.ForeignKey (to='Order', on_delete=models.SET_NULL, null=True, blank=True)
@@ -17,7 +17,7 @@ class OrderLine(models.Model):
 class Order(models.Model):
     date = models.DateField(null=True, blank=True)
     car = models.ForeignKey(to="Car", on_delete=models.SET_NULL, null=True, blank=True)
-    # service = models.ManyToManyField(to="Service")
+    # service = models.ManyToManyField(to="Service", through='OrderLine')
     def __str__(self):
         return f"{self.car} {self.date}"
 
