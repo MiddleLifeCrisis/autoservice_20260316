@@ -4,15 +4,21 @@ from .models import Car, OrderLine, Order, Service
 
 class OrderAdminInline(admin.TabularInline):
     model = OrderLine
+    fields = ['service', 'quantity', 'line_sum']  # Štai čia tavo stulpeliai!
+    readonly_fields = ['line_sum']  # Būtina, kad rodytų metodą
     extra = 0
 
 class OrderAdmin(admin.ModelAdmin):
     list_display = ['date', 'car']
     inlines = [OrderAdminInline]
 
+class OrderLineAdmin(admin.ModelAdmin):
+    list_display = ['order', 'service', 'quantity', 'line_sum']
+
 class Automobiliai(admin.ModelAdmin):
     list_display = ['make', 'model', 'client_name', 'license_plate', 'vin_code']
     list_filter = ['client_name', 'make', 'model']
+    search_fields = ['license_plate', 'vin_code']
 
     fieldsets = [
         ('Savininko informacija', {
@@ -29,9 +35,10 @@ class Paslaugos(admin.ModelAdmin):
     list_display = ['name', 'price']
 
 admin.site.register(Car, Automobiliai)
-admin.site.register(OrderLine)
+# admin.site.register(OrderLine)
 admin.site.register(Order, OrderAdmin)
 admin.site.register(Service, Paslaugos)
+admin.site.register(OrderLine, OrderLineAdmin)
 
 
 

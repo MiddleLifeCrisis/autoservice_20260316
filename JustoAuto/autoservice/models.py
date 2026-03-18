@@ -19,13 +19,15 @@ class OrderLine(models.Model):
     service = models.ForeignKey(to="Service", on_delete=models.SET_NULL, verbose_name="Paslauga",
                                 null=True, blank=True)
     quantity = models.IntegerField(verbose_name="Užsakomas kiekis", default=1)
+    def line_sum(self):
+        return self.quantity * self.service.price
 
     class Meta:
         verbose_name = 'Užsakymo eilutė'
         verbose_name_plural = 'Užsakymo eilutės'
 
     def __str__(self):
-        return f"{self.order} {self.service} {self.quantity}"
+        return f"{self.order} {self.service} {self.quantity} {self.line_sum()}"
 
 class Order(models.Model):
     date = models.DateField(null=True, blank=True, verbose_name="Data")
