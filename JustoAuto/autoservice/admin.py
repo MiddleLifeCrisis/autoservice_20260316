@@ -6,11 +6,7 @@ class OrderAdminInline(admin.TabularInline):
     model = OrderLine
     fields = ['service', 'quantity', 'line_sum']  # Štai čia tavo stulpeliai!
     readonly_fields = ['line_sum']  # Būtina, kad rodytų metodą
-    extra = 0
-
-class OrderAdmin(admin.ModelAdmin):
-    list_display = ['date', 'car']
-    inlines = [OrderAdminInline]
+    extra = 1
 
 class OrderLineAdmin(admin.ModelAdmin):
     list_display = ['order', 'service', 'quantity', 'line_sum']
@@ -18,7 +14,7 @@ class OrderLineAdmin(admin.ModelAdmin):
 class Automobiliai(admin.ModelAdmin):
     list_display = ['make', 'model', 'client_name', 'license_plate', 'vin_code']
     list_filter = ['client_name', 'make', 'model']
-    search_fields = ['license_plate', 'vin_code']
+    search_fields = ['license_plate', 'vin_code', 'client_name']
 
     fieldsets = [
         ('Savininko informacija', {
