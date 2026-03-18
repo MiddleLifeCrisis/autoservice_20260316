@@ -8,6 +8,11 @@ class OrderAdminInline(admin.TabularInline):
     readonly_fields = ['line_sum']  # Būtina, kad rodytų metodą
     extra = 1
 
+class OrderAdmin(admin.ModelAdmin):
+    list_display = ['date', 'car', 'total_cost']
+    readonly_fields = ['total_cost']
+    inlines = [OrderAdminInline]
+
 class OrderLineAdmin(admin.ModelAdmin):
     list_display = ['order', 'service', 'quantity', 'line_sum']
 
@@ -25,11 +30,6 @@ class Automobiliai(admin.ModelAdmin):
             'description': 'Pagrindinė techninė informacija apie transporto priemonę.'
         }),
     ]
-
-class OrderAdmin(admin.ModelAdmin):
-    list_display = ['date', 'car', 'total_cost']
-    readonly_fields = ['total_cost']
-    inlines = [OrderAdminInline]
 
 class Paslaugos(admin.ModelAdmin):
     list_display = ['name', 'price']

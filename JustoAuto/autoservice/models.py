@@ -14,7 +14,7 @@ class Service(models.Model):
         return f"{self.name}"
 
 class OrderLine(models.Model):
-    order = models.ForeignKey (to='Order', on_delete=models.SET_NULL, verbose_name="Užsakymas",
+    order = models.ForeignKey (to='Order', on_delete=models.SET_NULL, verbose_name="Užsakymas", related_name='eilutes',
                                null=True, blank=True)
     service = models.ForeignKey(to="Service", on_delete=models.SET_NULL, verbose_name="Paslauga",
                                 null=True, blank=True)
@@ -36,9 +36,11 @@ class Order(models.Model):
     car = models.ForeignKey(to="Car", on_delete=models.SET_NULL, null=True, blank=True, verbose_name="Automobilis")
 
     def total_cost(self):
-        eilutes = self.orderline_set.all()
-        suma = sum(line.line_sum() for line in eilutes)
-
+        eilutes = self.eilutes.all()
+        suma = 0
+        for line in eilutes:
+            viena_suma = line.line_sum()
+            suma = suma + viena_suma
         return suma
 
     total_cost.short_description = "Suma VISO, €"
