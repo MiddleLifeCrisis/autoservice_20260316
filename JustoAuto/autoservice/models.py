@@ -33,6 +33,13 @@ class Order(models.Model):
     date = models.DateField(null=True, blank=True, verbose_name="Data")
     car = models.ForeignKey(to="Car", on_delete=models.SET_NULL, null=True, blank=True, verbose_name="Automobilis")
 
+    def total_cost(self):
+        eilutes = self.orderline_set.all()
+        suma = sum(line.line_sum() for line in eilutes)
+
+        return suma
+
+
     class Meta:
         verbose_name = 'Užsakymas'
         verbose_name_plural = 'Užsakymai'

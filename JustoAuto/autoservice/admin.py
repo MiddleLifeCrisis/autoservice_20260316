@@ -30,6 +30,10 @@ class Automobiliai(admin.ModelAdmin):
         }),
     ]
 
+class OrderAdmin(admin.ModelAdmin):
+    list_display = ['date', 'car', 'total_cost']
+    readonly_fields = ['total_cost']
+    inlines = [OrderAdminInline]
 
 class Paslaugos(admin.ModelAdmin):
     list_display = ['name', 'price']
