@@ -9,7 +9,7 @@ class OrderAdminInline(admin.TabularInline):
     extra = 1
 
 class OrderAdmin(admin.ModelAdmin):
-    list_display = ['date', 'car', 'total_cost']
+    list_display = ['date', 'car', 'total_cost', 'status']
     readonly_fields = ['total_cost']
     inlines = [OrderAdminInline]
 

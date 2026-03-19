@@ -49,6 +49,15 @@ class Order(models.Model):
         verbose_name = 'Užsakymas'
         verbose_name_plural = 'Užsakymai'
 
+    ORDER_STATUS = (
+        ('1', 'Priimtas'),
+        ('2', 'Vykdomas'),
+        ('3', 'Laukia detalių'),
+        ('4', 'Baigtas'),
+    )
+
+    status = models.CharField(verbose_name="Status", max_length=1, choices=ORDER_STATUS, blank=True, default="d")
+
     def __str__(self):
         return f"{self.car} {self.date}"
 
@@ -64,5 +73,5 @@ class Car(models.Model):
         verbose_name_plural = 'Automobiliai'
 
     def __str__(self):
-        return f"{self.make}-{self.license_plate}:{self.client_name}"
+        return f"{self.make} - {self.license_plate} : {self.client_name}"
 
