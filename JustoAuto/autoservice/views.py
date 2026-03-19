@@ -16,3 +16,6 @@ def index(request):
     }
 
     return render(request, template_name="index.html", context=context)
+
+def about(request):
+    return render(request, template_name="about.html")

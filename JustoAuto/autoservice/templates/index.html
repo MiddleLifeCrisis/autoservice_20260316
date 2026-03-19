@@ -1,15 +1,12 @@
-<html>
-<head>
-    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
-    <title>Justo Servisas</title>
-</head>
-<body>
-<h1>Autoserviso Info: </h1>
+{% extends 'base.html' %}
+
+{% block title %}Justo autoservisas{% endblock %}
+
+{% block content %}
+<h1>Autoserviso Info:</h1>
 <ul>
     <li>Aptaranaujame mašinų: {{ num_masinu }} </li>
     <li>Siulome paslaugų: {{ num_paslaug }} </li>
     <li>Aptarnauta mašinų: {{ num_atlikta }} </li>
 </ul>
-
-</body>
-</html>
+{% endblock %}
