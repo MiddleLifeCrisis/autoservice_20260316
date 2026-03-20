@@ -1,3 +1,60 @@
-h1 {
-    color: orangered;
+/* Custom Variables for easy branding */
+:root {
+    --gear-gray: #2b2d42;
+    --oil-black: #1a1a1a;
+    --wrench-yellow: #ffc107; /* Classic Bootstrap Warning Yellow */
+    --clean-white: #f8f9fa;
+}
+
+body {
+    background-color: var(--clean-white);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Header Styling */
+.bg-primary {
+    min-height: 50vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+                url('https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?q=80&w=2000') no-repeat center center;
+    background-size: cover;
+    border-bottom: 5px solid var(--wrench-yellow);
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+}
+
+.bg-primary h1 {
+    font-weight: 800;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+/* Navigation */
+.navbar {
+    border-bottom: 2px solid #444;
+}
+
+.nav-link {
+    font-weight: 600;
+    transition: color 0.3s ease;
+}
+
+.nav-link:hover {
+    color: var(--wrench-yellow) !important;
+}
+
+/* Content Area */
+.container {
+    background: white;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+/* Footer */
+footer, .bg-dark {
+    background-color: var(--oil-black) !important;
+    border-top: 5px solid var(--wrench-yellow);
 }

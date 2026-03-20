@@ -17,5 +17,9 @@ def index(request):
 
     return render(request, template_name="index.html", context=context)
 
+def kainorastis(request):
+    paslaugos = Service.objects.all() # Paima duomenis iš admine esančių paslaugų
+    return render(request, 'kainorastis.html', {'paslaugos': paslaugos})
+
 def about(request):
     return render(request, template_name="about.html")
