@@ -3,10 +3,34 @@
 {% block title %}Justo autoservisas{% endblock %}
 
 {% block content %}
+
 <h1>Autoserviso Info šiandien:</h1>
 <ul>
     <li>Tvarkome mašinų: {{ num_masinu }} </li>
     <li>Siūlome paslaugų: {{ num_paslaug }} </li>
     <li>Sutvarkyta mašinų: {{ num_atlikta }} </li>
 </ul>
+
+<table class="table table-striped table-hover border">
+    <thead class="table-dark">
+                <tr>
+                    <th scope="col" class="ps-4">Veiksmai</th>
+                    <th scope="col">Skačius</th>
+                </tr>
+            </thead>
+<tb>
+    <tr>
+        <td>Tvarkome mašinų: </td>
+        <td class="ps-4 fw-bold">{{ num_masinu }}</td>
+    </tr>
+    <tr>
+        <td>Siūlome paslaugų: </td>
+        <td class="ps-4 fw-bold">{{ num_paslaug }}</td>
+    </tr>
+    <tr>
+        <td>Sutvarkyta mašinų: </td>
+        <td class="ps-4 fw-bold">{{ num_atlikta }}</td>
+    </tr>
+</tb>
+</table>
 {% endblock %}

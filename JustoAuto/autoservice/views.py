@@ -8,7 +8,6 @@ def index(request):
     num_paslaug = Service.objects.all().count()
     num_atlikta = Order.objects.filter(status='4').count()
 
-
     context = {
         'num_masinu': num_masinu,
         'num_paslaug': num_paslaug,
