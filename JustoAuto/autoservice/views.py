@@ -3,7 +3,7 @@ from django.http import HttpResponse
 from django.views.generic import DetailView
 
 from .models import Car, Service, Order, OrderLine
-from django.views import generic,
+from django.views import generic
 
 
 def index(request):

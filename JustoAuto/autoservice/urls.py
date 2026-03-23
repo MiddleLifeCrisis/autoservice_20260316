@@ -6,6 +6,8 @@ urlpatterns = [
     path('kainorastis/', views.kainorastis, name='kainorastis'),
     path('about/', views.about, name='about'),
     path('cars/', views.cars, name='cars'),
-    path('authors/<int:car_id>', views.car, name='car'),
+    path('car/<int:car_id>/', views.car, name='car'),
     path('orders/', views.OrderListView.as_view(), name='orders'),
+    path('orders/<int:pk>/', views.OrderDetailView.as_view(), name='order'),
+
 ]
