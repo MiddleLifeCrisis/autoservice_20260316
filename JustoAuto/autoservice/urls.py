@@ -6,5 +6,5 @@ urlpatterns = [
     path('kainorastis/', views.kainorastis, name='kainorastis'),
     path('about/', views.about, name='about'),
     path('cars/', views.cars, name='cars'),
-    # path('authors/<int:car_id>', views.car, name='author'),
+    path('authors/<int:car_id>', views.car, name='car'),
 ]

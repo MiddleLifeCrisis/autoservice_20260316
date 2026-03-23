@@ -31,3 +31,7 @@ def cars(request):
     }
     print(cars)
     return render(request, template_name="cars.html", context=context)
+
+def car(request, car_id):
+    car = Car.objects.get(id=car_id)
+    return render(request, template_name="car.html", context={'car': car })
