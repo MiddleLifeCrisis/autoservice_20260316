@@ -22,7 +22,7 @@ class OrderLine(models.Model):
     def line_sum(self):
         return self.quantity * self.service.price
 
-    line_sum.short_description = "Sume, €"
+    line_sum.short_description = "Suma, €"
 
     class Meta:
         verbose_name = 'Užsakymo eilutė'

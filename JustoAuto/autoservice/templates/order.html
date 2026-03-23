@@ -10,5 +10,10 @@
 <p>Uzsakymo automobilis: {{ order.car }}</p>
 <hr>
 <h2>Šio užsakymo eilutės:</h2>
-{{ order.eilutes.all }}
+{% for eilute in  order.eilutes.all %}
+<hr>
+<p>{{ eilute }}</p>
+<p> <b>Suma:</b> {{ eilute.line_sum }}</p>
+
+{% endfor %}
 {% endblock %}

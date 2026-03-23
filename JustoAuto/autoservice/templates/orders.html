@@ -9,6 +9,7 @@
     {% for order in orders %}
       <li>
         užsakymo ID: <a href="{{ order.id }}">{{ order.date }}</a>
+        <p> <b>Užsakymo kaina:</b> {{ order.total_cost }}</p>
       </li>
     {% endfor %}
   </ul>
