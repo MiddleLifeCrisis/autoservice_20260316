@@ -16,7 +16,7 @@ class Service(models.Model):
 class OrderLine(models.Model):
     order = models.ForeignKey (to='Order', on_delete=models.SET_NULL, verbose_name="Užsakymas", related_name='eilutes',
                                null=True, blank=True)
-    service = models.ForeignKey(to="Service", on_delete=models.SET_NULL, verbose_name="Paslauga",
+    service = models.ForeignKey(to="Service", on_delete=models.SET_NULL, verbose_name="Paslauga", related_name='paslaugos',
                                 null=True, blank=True)
     quantity = models.IntegerField(verbose_name="Užsakomas kiekis", default=1)
     def line_sum(self):

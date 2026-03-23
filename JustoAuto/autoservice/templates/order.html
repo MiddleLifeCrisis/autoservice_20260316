@@ -3,10 +3,12 @@
 {% block "title" %}Užsakymas{% endblock %}
 
 {% block content %}
-    <h1>Užsakymas:</h1>
-    <p>Tikslesni duomenys: </p>
-    <p>Uzsakymo statusas: {{ order.status }}</p>
-    <p>Uzsakymo data: {{ order.date }}</p>
-    <p>Uzsakymo automobilis: {{ order.car }}</p>
-
+<h1>Užsakymas:</h1>
+<p>Tikslesni duomenys: </p>
+<p>Uzsakymo statusas: {{ order.status }}</p>
+<p>Uzsakymo data: {{ order.date }}</p>
+<p>Uzsakymo automobilis: {{ order.car }}</p>
+<hr>
+<h2>Šio užsakymo eilutės:</h2>
+{{ order.eilutes.all }}
 {% endblock %}
