@@ -22,3 +22,12 @@ def kainorastis(request):
 
 def about(request):
     return render(request, template_name="about.html")
+
+def cars(request):
+
+    cars = Car.objects.all()
+    context = {
+        'cars': cars
+    }
+    print(cars)
+    return render(request, template_name="cars.html", context=context)

@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block title %}Mašinos{% endblock %}
+
+{% block content %}
+<h1>Mašinos servise: </h1>
+<p>Šiuo metu tvarkomos mašinos: </p>
+{% for car in cars %}
+<p>
+    <a> {{ car }} </a>
+</p>
+
+{% endfor %}
+{% endblock %}

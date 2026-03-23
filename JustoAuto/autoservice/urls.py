@@ -5,4 +5,6 @@ urlpatterns = [
     path('', views.index, name='index'),
     path('kainorastis/', views.kainorastis, name='kainorastis'),
     path('about/', views.about, name='about'),
+    path('cars/', views.cars, name='cars'),
+    # path('authors/<int:car_id>', views.car, name='author'),
 ]

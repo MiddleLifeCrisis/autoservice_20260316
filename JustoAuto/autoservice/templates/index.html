@@ -11,14 +11,14 @@
     <li>Sutvarkyta mašinų: {{ num_atlikta }} </li>
 </ul>
 
-<table class="table table-striped table-hover border">
+<table class="table table-striped table-hover border shadow-sm">
     <thead class="table-dark">
                 <tr>
                     <th scope="col" class="ps-4">Veiksmai</th>
-                    <th scope="col">Skačius</th>
+                    <th scope="col">Skaičius</th>
                 </tr>
             </thead>
-<tb>
+<tbody>
     <tr>
         <td>Tvarkome mašinų: </td>
         <td class="ps-4 fw-bold">{{ num_masinu }}</td>
@@ -31,6 +31,6 @@
         <td>Sutvarkyta mašinų: </td>
         <td class="ps-4 fw-bold">{{ num_atlikta }}</td>
     </tr>
-</tb>
+</tbody>
 </table>
 {% endblock %}
