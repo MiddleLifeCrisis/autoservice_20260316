@@ -1,6 +1,9 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from django.views.generic import DetailView
+
 from .models import Car, Service, Order, OrderLine
+from django.views import generic,
 
 
 def index(request):
@@ -35,3 +38,13 @@ def cars(request):
 def car(request, car_id):
     car = Car.objects.get(id=car_id)
     return render(request, template_name="car.html", context={'car': car })
+
+class OrderListView(generic.ListView):
+    model = Order
+    template_name = 'orders.html'
+    context_object_name = 'orders'
+
+class OrderDetailView(generic.DetailView):
+    model = Order
+    template_name = 'order.html'
+    context_object_name = 'order'

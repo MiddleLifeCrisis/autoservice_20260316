@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block "title" %}Užsakymai{% endblock %}
+
+{% block content %}
+  <h1>Užsakymai:</h1>
+  {% if orders %}
+  <ul>
+    {% for order in orders %}
+      <li>
+        užsakymo ID: <a href="{{ order.id }}">{{ order.date }}</a>
+      </li>
+    {% endfor %}
+  </ul>
+  {% else %}
+    <p>Šiuo metu užsakymų nepriimta</p>
+  {% endif %}
+{% endblock %}

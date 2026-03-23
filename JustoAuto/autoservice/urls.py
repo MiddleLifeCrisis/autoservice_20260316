@@ -7,4 +7,5 @@ urlpatterns = [
     path('about/', views.about, name='about'),
     path('cars/', views.cars, name='cars'),
     path('authors/<int:car_id>', views.car, name='car'),
+    path('orders/', views.OrderListView.as_view(), name='orders'),
 ]
