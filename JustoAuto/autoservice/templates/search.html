@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block title %}Paieškos rezultatai{% endblock %}
+
+{% block heading %} Statistika {% endblock %}
+
+{% block content %}
+
+{% for car in car_search_results %}
+
+<h1>Paieškos pagal "{{query}}" rezultatai:</h1>
+
+<p><a href="{% url 'car' car.pk %}">{{ car }}</a></p>
+
+{% endfor %}
+
+{% endblock %}

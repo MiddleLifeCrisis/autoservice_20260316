@@ -2,6 +2,9 @@ from django.core.paginator import Paginator
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.views.generic import DetailView
+from django.db.models import Q
+
+Q
 
 from .models import Car, Service, Order, OrderLine
 from django.views import generic
@@ -52,3 +55,15 @@ class OrderDetailView(generic.DetailView):
     model = Order
     template_name = 'order.html'
     context_object_name = 'order'
+
+def search(request):
+    query = request.GET.get('query')
+    context = {
+        "car_search_results": Car.objects.filter(Q (make__icontains=query) |
+                                                 Q (model__icontains=query) |
+                                                 Q (license_plate__icontains=query) |
+                                                 Q (vin_code__icontains=query) |
+                                                 Q (client_name=query)
+                                                 ),
+    }
+    return render(request, template_name="search.html", context=context)
