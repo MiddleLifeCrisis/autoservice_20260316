@@ -68,6 +68,7 @@ class Car(models.Model):
     license_plate = models.CharField(verbose_name="Valstybinis numeris")
     vin_code = models.CharField(verbose_name="VIN number")
     client_name = models.CharField(verbose_name="Kliento vardas ir pavardė")
+    photo = models.ImageField(upload_to="car_photo", null=True, blank=True)
 
     class Meta:
         verbose_name = 'Automobilis'
