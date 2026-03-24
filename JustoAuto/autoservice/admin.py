@@ -17,7 +17,7 @@ class OrderLineAdmin(admin.ModelAdmin):
     list_display = ['order', 'service', 'quantity', 'line_sum']
 
 class Automobiliai(admin.ModelAdmin):
-    list_display = ['make', 'model', 'client_name', 'license_plate', 'vin_code', 'photo']
+    list_display = ['make', 'model', 'client_name', 'license_plate', 'vin_code', 'photo' ]
     list_filter = ['client_name', 'make', 'model']
     search_fields = ['license_plate', 'vin_code', 'client_name']
 
@@ -26,7 +26,7 @@ class Automobiliai(admin.ModelAdmin):
             'fields': ('client_name',)
         }),
         ('Automobilio duomenys', {
-            'fields': ('make', 'model', 'license_plate', 'vin_code', 'photo'),
+            'fields': ('make', 'model', 'license_plate', 'vin_code', 'photo' ),
             'description': 'Pagrindinė techninė informacija apie transporto priemonę.'
         }),
     ]
