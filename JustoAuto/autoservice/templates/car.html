@@ -2,14 +2,14 @@
 
 {% block title %}Mašina{% endblock %}
 
+{% block heading %} Mašina {% endblock %}
+
 {% block content %}
 
-<h1>Mašinos info: </h1>
-<p>Tikslesni duomenys: </p>
-<p>{{ car.client_name }}</p>
-<p>{{ car.make }}</p>
-<p>{{ car.model }}</p>
-<p>{{ car.license_plate }}</p>
-<p>{{ car.vin_code }}</p>
+<h1> {{ car.make }} {{ car.model }} </h1>
+
+<p><b>Valstybinis numeris:</b> {{ car.license_plate }}</p>
+<p><b>Vin Kodas:</b> {{ car.vin_code }}</p>
+<p><b>Klientas: </b>{{ car.client_name }}</p>
 
 {% endblock %}
