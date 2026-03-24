@@ -5,19 +5,44 @@
 {% block heading %} Užsakymas {% endblock %}
 
 {% block content %}
-<h1>Užsakymas:</h1>
-<p>Tikslesni duomenys: </p>
+<h1> {{ order.car }} </h1>
 <p>Uzsakymo statusas: {{ order.get_status_display }}</p>
 <p>Uzsakymo data: {{ order.date }}</p>
-<p>Uzsakymo automobilis: {{ order.car }}</p>
-<hr>
-<h2>Šio užsakymo eilutės:</h2>
-{% for eilute in  order.eilutes.all %}
-<hr>
-<p>{{ eilute }}</p>
-<p> <b>Suma:</b> {{ eilute.line_sum }}</p>
 
-{% endfor %}
-<hr>
-<p> <b>Užsakymo kaina:</b> {{ order.total_cost }}</p>
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th>Paslauga</th>
+        <th>Kaina</th>
+        <th>Kiekis</th>
+        <th>Suma</th>
+      </tr>
+    </thead>
+    <tbody>
+    {% for eilute in  order.eilutes.all %}
+      <tr>
+        <td> {{ eilute.service }} </td>
+        <td> {{ eilute.service.price }} </td>
+        <td> {{ eilute.quantity }} </td>
+        <td> {{ eilute.line_sum }} </td>
+      </tr>
+    {% endfor %}
+    <tr>
+        <th colspan="3"> BENDRA SUMA: </th>
+        <th> {{ order.total_cost }} </th>
+    </tr>
+
+    </tbody>
+  </table>
+
+<!--<hr>-->
+<!--<h2>Šio užsakymo eilutės:</h2>-->
+<!--{% for eilute in  order.eilutes.all %}-->
+<!--<hr>-->
+<!--<p>{{ eilute }}</p>-->
+<!--<p> <b>Suma:</b> {{ eilute.line_sum }}</p>-->
+
+<!--{% endfor %}-->
+<!--<hr>-->
+<!--<p> <b>Užsakymo kaina:</b> {{ order.total_cost }}</p>-->
 {% endblock %}
