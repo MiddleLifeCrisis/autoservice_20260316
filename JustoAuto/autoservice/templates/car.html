@@ -6,6 +6,10 @@
 
 {% block content %}
 
+{% if car.photo %}
+<img src="{{ car.photo.url }}" class="card-img-top" alt="...">
+{% endif %}
+
 <h1> {{ car.make }} {{ car.model }} </h1>
 
 <p><b>Valstybinis numeris:</b> {{ car.license_plate }}</p>
