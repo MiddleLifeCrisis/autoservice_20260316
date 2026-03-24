@@ -1,3 +1,4 @@
+from django.core.paginator import Paginator
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.views.generic import DetailView
@@ -27,10 +28,12 @@ def about(request):
     return render(request, template_name="about.html")
 
 def cars(request):
-
     cars = Car.objects.all()
+    paginator = Paginator(cars, 2)
+    page_number = request.GET.get('page')
+    paged_cars = paginator.get_page(page_number)
     context = {
-        'cars': cars
+        'cars': paged_cars,
     }
     print(cars)
     return render(request, template_name="cars.html", context=context)

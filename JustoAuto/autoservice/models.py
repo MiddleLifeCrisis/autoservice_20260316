@@ -1,4 +1,5 @@
 from django.db import models
+from django.core.paginator import Paginator
 
 class Service(models.Model):
     name = models.CharField(verbose_name="Paslaugos pav.")
