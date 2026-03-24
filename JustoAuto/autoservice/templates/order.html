@@ -5,7 +5,7 @@
 {% block content %}
 <h1>Užsakymas:</h1>
 <p>Tikslesni duomenys: </p>
-<p>Uzsakymo statusas: {{ order.status }}</p>
+<p>Uzsakymo statusas: {{ order.get_status_display }}</p>
 <p>Uzsakymo data: {{ order.date }}</p>
 <p>Uzsakymo automobilis: {{ order.car }}</p>
 <hr>
@@ -16,4 +16,6 @@
 <p> <b>Suma:</b> {{ eilute.line_sum }}</p>
 
 {% endfor %}
+<hr>
+<p> <b>Užsakymo kaina:</b> {{ order.total_cost }}</p>
 {% endblock %}

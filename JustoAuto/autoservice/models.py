@@ -59,7 +59,7 @@ class Order(models.Model):
     status = models.CharField(verbose_name="Status", max_length=1, choices=ORDER_STATUS, blank=True, default="d")
 
     def __str__(self):
-        return f"{self.car} {self.date}"
+        return f"{self.car}"
 
 class Car(models.Model):
     make = models.CharField(verbose_name="Brand", max_length=50)
@@ -73,5 +73,5 @@ class Car(models.Model):
         verbose_name_plural = 'Automobiliai'
 
     def __str__(self):
-        return f"{self.make} - {self.license_plate} : {self.client_name}"
+        return f"{self.make} - {self.license_plate}"
 
