@@ -23,7 +23,7 @@
                     Apie mus
                 </a>
                 {% if user.is_authenticated %}
-                <a class="nav-link" href="{% url 'about' %}">
+                <a class="nav-link">
                     <div class="sb-nav-link-icon">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="orange" class="bi bi-person-circle" viewBox="0 0 16 16">
                             <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
@@ -32,6 +32,16 @@
                     </div>
                     {{ user }}
                 </a>
+<!--                <a class="nav-link">-->
+                <div class="nav-link">
+                    <div class="sb-nav-link-icon"><i class="fa-solid fa-arrow-right-from-bracket"></i></div>
+                    <form method="post" action="{% url 'logout' %}">
+                        {% csrf_token %}
+                        <button class="nav-link"  type="submit"> Logout </button>
+                    </form>
+<!--                </a>-->
+                </div>
+
                 {% else%}
                 <a class="nav-link" href="{% url 'login' %}">
                     <div class="sb-nav-link-icon"><i class="fas fa-smile"></i></div>

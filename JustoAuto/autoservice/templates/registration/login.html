@@ -8,8 +8,9 @@
 
 <form method="post">
     {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit"> Prisijungti </button>
+    {% load crispy_forms_tags %}
+    {{ form | crispy }}
+    <button type="submit" class="btn btn-primary"> Prisijungti </button>
 </form>
 
 {% endblock %}
