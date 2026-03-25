@@ -15,10 +15,15 @@ def index(request):
     num_paslaug = Service.objects.all().count()
     num_atlikta = Order.objects.filter(status='4').count()
 
+    # Papildome kintamuoju num_visits, įkeliame jį į kontekstą.
+    num_visits = request.session.get('num_visits', 1)
+    request.session['num_visits'] = num_visits + 1
+
     context = {
         'num_masinu': num_masinu,
         'num_paslaug': num_paslaug,
         'num_atlikta': num_atlikta,
+        'num_visits': num_visits,
     }
 
     return render(request, template_name="index.html", context=context)
@@ -67,3 +72,4 @@ def search(request):
                                                  ),
     }
     return render(request, template_name="search.html", context=context)
+
