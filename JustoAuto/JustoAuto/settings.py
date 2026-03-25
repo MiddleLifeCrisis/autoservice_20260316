@@ -23,6 +23,15 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-ku-vh_7v3f@d%zk&s$*0c*6h*&f8s0g7m*ymgvc7n9yf3a4t_e'
 
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'mano_pastas@gmail.com'
+# el. pašto adresas iš kurio siųsite
+EMAIL_HOST_PASSWORD = 'VerySecret'
+# slaptažodis
+
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
@@ -106,8 +115,8 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/6.0/topics/i18n/
 
-# LANGUAGE_CODE = 'en-us'
-LANGUAGE_CODE = 'lt'
+LANGUAGE_CODE = 'en-us'
+# LANGUAGE_CODE = 'lt'
 
 # TIME_ZONE = 'UTC'
 TIME_ZONE = 'Europe/Vilnius'
@@ -134,4 +143,5 @@ LOGOUT_REDIRECT_URL = '/'
 
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
 CRISPY_TEMPLATE_PACK = 'bootstrap5'
+
 
