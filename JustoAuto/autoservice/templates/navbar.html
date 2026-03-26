@@ -32,7 +32,10 @@
                     </div>
                     {{ user }}
                 </a>
-<!--                <a class="nav-link">-->
+                <a class="nav-link" href="{% url 'myorders' %}">
+                    <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                    Mano Užsakymai
+                </a>
                 <div class="nav-link">
                     <div class="sb-nav-link-icon"><i class="fa-solid fa-arrow-right-from-bracket"></i></div>
                     <form method="post" action="{% url 'logout' %}">

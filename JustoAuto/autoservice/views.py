@@ -1,3 +1,4 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.paginator import Paginator
 from django.shortcuts import render
 from django.http import HttpResponse
@@ -73,3 +74,10 @@ def search(request):
     }
     return render(request, template_name="search.html", context=context)
 
+class MyOrderInstanceListView(LoginRequiredMixin, generic.ListView):
+    model = Order
+    template_name = "myorders.html"
+    context_object_name = "orders"
+
+    def get_queryset(self):
+        return Order.objects.filter(client=self.request.user)
