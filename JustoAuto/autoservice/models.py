@@ -1,4 +1,6 @@
 from django.db import models
+from django.contrib.auth.models import User
+from django.utils import timezone
 from django.core.paginator import Paginator
 
 class Service(models.Model):
@@ -35,6 +37,8 @@ class OrderLine(models.Model):
 class Order(models.Model):
     date = models.DateField(null=True, blank=True, verbose_name="Data")
     car = models.ForeignKey(to="Car", on_delete=models.SET_NULL, null=True, blank=True, verbose_name="Automobilis")
+    client = models.ForeignKey(to=User, verbose_name="Klientas", on_delete=models.SET_NULL, null=True, blank=True)
+    due_back = models.DateField(null=True, blank=True)
 
     def total_cost(self):
         eilutes = self.eilutes.all()
