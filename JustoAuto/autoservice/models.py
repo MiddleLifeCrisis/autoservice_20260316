@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.utils import timezone
+from tinymce.models import HTMLField
 from django.core.paginator import Paginator
 
 class Service(models.Model):
@@ -76,6 +77,7 @@ class Car(models.Model):
     vin_code = models.CharField(verbose_name="VIN number")
     client_name = models.CharField(verbose_name="Kliento vardas ir pavardė")
     photo = models.ImageField(upload_to="car_photo", null=True, blank=True)
+    description = HTMLField(default="")
 
     class Meta:
         verbose_name = 'Automobilis'

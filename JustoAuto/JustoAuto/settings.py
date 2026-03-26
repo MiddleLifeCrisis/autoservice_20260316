@@ -43,6 +43,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'autoservice',
+    'tinymce',
     'crispy_forms',
     'crispy_bootstrap5',
     'django.contrib.admin',
