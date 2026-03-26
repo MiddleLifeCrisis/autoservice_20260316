@@ -5,9 +5,19 @@
 {% block heading %} Mano užsakymai {% endblock %}
 
 {% block content %}
+  <div style="list-style-type: none; padding-left: 0;">
+    {% for order in orders %}
+      <div class="order-item" style="margin-bottom: 20px;">
+        <div><strong>Užsakymas:</strong> {{ order.car }}</div>
+        <div><strong>Data:</strong> {{ order.date }}</div>
+        <div><strong>Statusas:</strong> {{ order.get_status_display }}</div>
+        <div><strong>Suma:</strong> {{ order.total_cost }} €</div>
+        <div><strong>Gražinimo data: </strong> {{ order.due_back }} </div>
 
-{% for order in orders %}
-<p>{{ orders }}</p>
-{% endfor %}
-
+        <hr style="border: 0; border-top: 1px solid #ccc; margin-top: 10px;">
+      </div>
+    {% empty %}
+      <p>Jūs dar neturite jokių užsakymų.</p>
+    {% endfor %}
+  </div>
 {% endblock %}
