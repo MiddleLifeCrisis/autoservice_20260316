@@ -3,67 +3,34 @@
         <div class="sb-sidenav-menu">
             <div class="nav">
                 <a class="nav-link" href="{% url 'index' %}">
-                    <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                    <div class="sb-nav-link-icon"><i class="fas fa-home"></i></div>
                     PRADŽIA
                 </a>
                 <a class="nav-link" href="{% url 'cars' %}">
-                    <div class="sb-nav-link-icon"><i class="fas fa-car" aria-hidden="true"></i></div>
+                    <div class="sb-nav-link-icon"><i class="fas fa-car"></i></div>
                     Automobiliai
                 </a>
                 <a class="nav-link" href="{% url 'orders' %}">
-                    <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
-                    Užsakymai
+                    <div class="sb-nav-link-icon"><i class="fas fa-list"></i></div>
+                    Visi Užsakymai
                 </a>
                 <a class="nav-link" href="{% url 'kainorastis' %}">
-                    <div class="sb-nav-link-icon"><i class="fas fa-money-bill"></i></div>
+                    <div class="sb-nav-link-icon"><i class="fas fa-tag"></i></div>
                     Kainos
                 </a>
-                <a class="nav-link" href="{% url 'about' %}">
-                    <div class="sb-nav-link-icon"><i class="fas fa-smile"></i></div>
-                    Apie mus
-                </a>
+
                 {% if user.is_authenticated %}
-<!--                <a class="nav-link">-->
-<!--                    <div class="sb-nav-link-icon">-->
-<!--                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="orange" class="bi bi-person-circle" viewBox="0 0 16 16">-->
-<!--                            <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>-->
-<!--                            <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1"/>-->
-<!--                         </svg>-->
-<!--                    </div>-->
-<!--                    {{ user }}-->
-<!--                </a>-->
+                <div class="sb-sidenav-menu-heading">Mano zona</div>
                 <a class="nav-link" href="{% url 'myorders' %}">
-                    <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                    <div class="sb-nav-link-icon"><i class="fas fa-user-check"></i></div>
                     Mano Užsakymai
                 </a>
-<!--                <div class="nav-link">-->
-<!--                    <div class="sb-nav-link-icon"><i class="fa-solid fa-arrow-right-from-bracket"></i></div>-->
-<!--                    <form method="post" action="{% url 'logout' %}">-->
-<!--                        {% csrf_token %}-->
-<!--                        <button class="nav-link"  type="submit"> Logout </button>-->
-<!--                    </form>-->
-<!--                </a>-->
-                </div>
-
-                {% else%}
-                <a class="nav-link" href="{% url 'login' %}">
-                    <div class="sb-nav-link-icon"><i class="fas fa-smile"></i></div>
-                    Login
-                </a>
-
                 {% endif %}
             </div>
         </div>
         <div class="sb-sidenav-footer">
-            <div class="small">Logged in as:</div>
-            Start Bootstrap
+            <div class="small">Prisijungęs:</div>
+            {% if user.is_authenticated %}{{ user.username }}{% else %}Svečias{% endif %}
         </div>
     </nav>
-
-    <!-- Navbar Search-->
-<form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0" action="{% url 'search' %}">
-    <div class="input-group" >
-        <input class="form-control" type="text" placeholder="Paieška" name="query" aria-label="Search for..." aria-describedby="btnNavbarSearch" />
-    </div>
-</form>
 </div>
