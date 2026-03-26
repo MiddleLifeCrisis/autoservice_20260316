@@ -12,7 +12,7 @@
         <div><strong>Data:</strong> {{ order.date }}</div>
         <div><strong>Statusas:</strong> {{ order.get_status_display }}</div>
         <div><strong>Suma:</strong> {{ order.total_cost }} €</div>
-        <div><strong>Gražinimo data: </strong> {{ order.due_back }} </div>
+        <div class="{% if order.is_overdue %}text-danger{% endif %}"><strong>Gražinimo data: </strong> {{ order.due_back }} </div>
 
         <hr style="border: 0; border-top: 1px solid #ccc; margin-top: 10px;">
       </div>
