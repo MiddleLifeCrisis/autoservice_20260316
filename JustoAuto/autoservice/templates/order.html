@@ -35,14 +35,11 @@
     </tbody>
   </table>
 
-<!--<hr>-->
-<!--<h2>Šio užsakymo eilutės:</h2>-->
-<!--{% for eilute in  order.eilutes.all %}-->
-<!--<hr>-->
-<!--<p>{{ eilute }}</p>-->
-<!--<p> <b>Suma:</b> {{ eilute.line_sum }}</p>-->
 
-<!--{% endfor %}-->
-<!--<hr>-->
-<!--<p> <b>Užsakymo kaina:</b> {{ order.total_cost }}</p>-->
+{% for review in order.reviews.all %}
+<p><b> {{ review.reviewer }} </b> <i>{{ review.date_created }}</i></p>
+<p> {{ review.content }} </p>
+<hr>
+{% endfor %}
+
 {% endblock %}

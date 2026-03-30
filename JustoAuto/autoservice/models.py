@@ -91,7 +91,7 @@ class OrderReview(models.Model):
                               on_delete=models.SET_NULL,
                               null=True,
                               blank=True,
-                              related_name='review_order')
+                              related_name='reviews')
     reviewer = models.ForeignKey(to=User,
                                  on_delete=models.SET_NULL,
                                  null=True,
