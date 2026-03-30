@@ -86,3 +86,18 @@ class Car(models.Model):
     def __str__(self):
         return f"{self.make} - {self.license_plate}"
 
+class OrderReview(models.Model):
+    order = models.ForeignKey(to=Order,
+                              on_delete=models.SET_NULL,
+                              null=True,
+                              blank=True,
+                              related_name='review_order')
+    reviewer = models.ForeignKey(to=User,
+                                 on_delete=models.SET_NULL,
+                                 null=True,
+                                 blank=True,)
+    date_created = models.DateTimeField(auto_now_add=True)
+    content = models.TextField()
+
+    class Meta:
+        ordering = ['-date_created']
