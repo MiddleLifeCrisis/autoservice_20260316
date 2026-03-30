@@ -1,13 +1,13 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.forms import UserCreationForm
 from django.core.paginator import Paginator
-from django.shortcuts import render
+from django.shortcuts import render, reverse
 from django.http import HttpResponse
 from django.urls import reverse_lazy
 from django.views.generic import DetailView
 from django.db.models import Q
-
-Q
+from django.views.generic.edit import FormMixin
+from .forms import OrderReviewForm
 
 from .models import Car, Service, Order, OrderLine
 from django.views import generic
@@ -59,10 +59,31 @@ class OrderListView(generic.ListView):
     context_object_name = 'orders'
     paginate_by = 3
 
-class OrderDetailView(generic.DetailView):
+class OrderDetailView(FormMixin, generic.DetailView):
     model = Order
     template_name = 'order.html'
     context_object_name = 'order'
+    form_class = OrderReviewForm
+
+    def get_success_url(self):
+        return reverse ('order', kwargs={"pk": self.object.pk})
+
+
+    # standartinis post metodo perrašymas, naudojant FormMixin, galite kopijuoti tiesiai į savo projektą.
+    def post(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        form = self.get_form()
+        if form.is_valid():
+            return self.form_valid(form)
+        else:
+            return self.form_invalid(form)
+
+    def form_valid(self, form):
+        form.instance.order = self.get_object()
+        form.instance.reviewer = self.request.user
+        form.save()
+        return super().form_valid(form)
+
 
 def search(request):
     query = request.GET.get('query')
