@@ -7,7 +7,7 @@ from django.urls import reverse_lazy
 from django.views.generic import DetailView
 from django.db.models import Q
 from django.views.generic.edit import FormMixin
-from .forms import OrderReviewForm
+from .forms import OrderReviewForm, UserUpdateForm
 
 from .models import Car, Service, Order, OrderLine
 from django.views import generic
@@ -78,6 +78,7 @@ class OrderDetailView(FormMixin, generic.DetailView):
         else:
             return self.form_invalid(form)
 
+    # štai čia nurodome, kad knyga bus būtent ta, po kuria komentuojame, o vartotojas bus tas, kuris yra prisijungęs.
     def form_valid(self, form):
         form.instance.order = self.get_object()
         form.instance.reviewer = self.request.user
@@ -110,3 +111,11 @@ class SignUpView(generic.CreateView):
     form_class = UserCreationForm
     template_name = 'signup.html'
     success_url = reverse_lazy('login')
+
+class UserUpdateView(LoginRequiredMixin, generic.UpdateView):
+    form_class = UserUpdateForm
+    template_name = "profile.html"
+    success_url = reverse_lazy('profile')
+
+    def get_object(self, queryset=...):
+        return self.request.user

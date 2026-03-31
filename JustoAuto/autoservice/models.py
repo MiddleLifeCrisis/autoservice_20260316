@@ -97,7 +97,7 @@ class OrderReview(models.Model):
                                  null=True,
                                  blank=True,)
     date_created = models.DateTimeField(auto_now_add=True)
-    content = models.TextField()
+    content = models.TextField(verbose_name="Jūsų atsiliepimas")
 
     class Meta:
         ordering = ['-date_created']
