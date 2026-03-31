@@ -41,12 +41,19 @@
     {% load crispy_forms_tags %}
     {{ form | crispy }}
     <button type="submit" class="btn btn-primary mb-5 ">Paskelbti</button>
-
-
 </form>
 {% endif %}
 {% for review in order.reviews.all %}
+
 <p><b> {{ review.reviewer }} </b> <i>{{ review.date_created }}</i></p>
+<p>
+    {% if review.reviewer.profile.photo %}
+    <img src="{{ review.reviewer.profile.photo.url }}" class="rounded-circle" style="width: 30px; height: 30px; object-fit: cover;">
+    {% endif %}
+    <b>{{ review.reviewer }}</b>,
+    <i>{{ review.date_created }}</i>
+</p>
+
 <p> {{ review.content }} </p>
 <hr>
 {% endfor %}

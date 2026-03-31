@@ -4,7 +4,7 @@
 
 {% block content %}
 {% if user.profile.photo %}
-<img src="{{ user.profile.photo.url }}" class="rounded-circle">
+<img src="{{ user.profile.photo.url }}">
 {% endif %}
 <h1>Vartotojo "{{ user.username }}" profilis</h1>
 <form method="post">
