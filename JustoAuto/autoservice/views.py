@@ -1,14 +1,14 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
 from django.core.paginator import Paginator
-from django.shortcuts import render, reverse
+from django.shortcuts import render, reverse, redirect
 from django.http import HttpResponse
 from django.urls import reverse_lazy
 from django.views.generic import DetailView
 from django.db.models import Q
 from django.views.generic.edit import FormMixin
-from .forms import OrderReviewForm, UserUpdateForm
-
+from .forms import OrderReviewForm, UserUpdateForm, ProfileUpdateForm
 from .models import Car, Service, Order, OrderLine
 from django.views import generic
 
@@ -119,3 +119,17 @@ class UserUpdateView(LoginRequiredMixin, generic.UpdateView):
 
     def get_object(self, queryset=...):
         return self.request.user
+
+@login_required
+def profile(request):
+    u_form = UserUpdateForm(request.POST or None, instance=request.user)
+    p_form = ProfileUpdateForm(request.POST or None, request.FILES, instance=request.user.profile)
+    if u_form.is_valid() and p_form.is_valid():
+        u_form.save()
+        p_form.save()
+        return redirect('profile')
+    context = {
+        'u_form': u_form,
+        'p_form': p_form,
+    }
+    return render(request, template_name="profile.html", context=context)

@@ -101,3 +101,10 @@ class OrderReview(models.Model):
 
     class Meta:
         ordering = ['-date_created']
+
+class Profile(models.Model):
+    user = models.OneToOneField(to=User, on_delete=models.CASCADE)
+    photo = models.ImageField(upload_to="profile_pics", null=True, blank=True)
+
+    def __str__(self):
+        return f"{self.user.username} profilis"
