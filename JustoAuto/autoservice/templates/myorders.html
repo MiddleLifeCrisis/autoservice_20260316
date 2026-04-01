@@ -8,11 +8,15 @@
   <div style="list-style-type: none; padding-left: 0;">
     {% for order in orders %}
       <div class="order-item" style="margin-bottom: 20px;">
-        <div><strong>Užsakymas:</strong> {{ order.car }}</div>
+        <div class="order-item" style="margin-bottom: 20px; border: 1px solid #eee; padding: 15px;">
+        <div>
+          <strong>Užsakymas:</strong>
+          <a href="{% url 'order-detail' order.id %}" style="text-decoration: none; color: #007bff; font-weight: bold;">
+            {{ order.car }} (Peržiūrėti detales →)
+          </a>
+        </div>
         <div><strong>Data:</strong> {{ order.date }}</div>
         <div><strong>Statusas:</strong> {{ order.get_status_display }}</div>
-        <div><strong>Suma:</strong> {{ order.total_cost }} €</div>
-        <div class="{% if order.is_overdue %}text-danger{% endif %}"><strong>Gražinimo data: </strong> {{ order.due_back }} </div>
 
         <hr style="border: 0; border-top: 1px solid #ccc; margin-top: 10px;">
       </div>
