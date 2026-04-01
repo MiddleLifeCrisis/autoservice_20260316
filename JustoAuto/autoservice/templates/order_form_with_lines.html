@@ -17,20 +17,19 @@
         {{ formset.management_form }}
 
         {% for line_form in formset %}
-            <div class="row border-bottom mb-2 pb-2">
-                <div class="col-md-6">
-                    {{ line_form.service|as_crispy_field }}
-                </div>
-                <div class="col-md-3">
-                    {{ line_form.quantity|as_crispy_field }}
-                </div>
-                {% if formset.can_delete %}
-                    <div class="col-md-3">
-                        {{ line_form.DELETE|as_crispy_field }}
-                    </div>
-                {% endif %}
-            </div>
-        {% endfor %}
+    <div class="row border-bottom mb-2 pb-2">
+        {# ŠITA EILUTĖ YRA BŪTINA REDAGAVIMUI! #}
+        {{ line_form.id }}
+
+        <div class="col-md-6">
+            {{ line_form.service|as_crispy_field }}
+        </div>
+        <div class="col-md-3">
+            {{ line_form.quantity|as_crispy_field }}
+        </div>
+        ...
+    </div>
+{% endfor %}
     </div>
 
     <button type="submit" class="btn btn-success">Išsaugoti viską</button>

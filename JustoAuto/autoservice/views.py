@@ -2,7 +2,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
 from django.core.paginator import Paginator
-from django.shortcuts import render, reverse, redirect
+from django.shortcuts import render, reverse, redirect, get_object_or_404
 from django.http import HttpResponse
 from django.urls import reverse_lazy
 from django.views.generic import DetailView
@@ -164,32 +164,53 @@ class OrderDeleteView(LoginRequiredMixin, generic.DeleteView):
         return Order.objects.filter(client=self.request.user)
 
 
+@login_required
 def create_order(request):
-    # 1. Patikriname, ar vartotojas paspaudė "Išsaugoti" (POST)
     if request.method == "POST":
-        form = OrderCreateForm(request.POST)  # Pagrindinė forma (mašina, data)
-        formset = OrderLineFormSet(request.POST)  # Eilučių rinkinys (paslaugos, kiekiai)
-
-        # 2. Tikriname, ar abi formos užpildytos teisingai
+        form = OrderCreateForm(request.POST)
+        formset = OrderLineFormSet(request.POST)
         if form.is_valid() and formset.is_valid():
-            # Išsaugome užsakymą, bet dar nesiunčiame į DB (commit=False)
             order = form.save(commit=False)
-            # Priskiriame prisijungusį vartotoją kaip klientą
             order.client = request.user
-            order.save()  # DABAR užsakymas įrašytas ir gavo savo ID
-
-            # 3. Svarbiausia dalis: susiejame eilutes su šiuo konkrečiu užsakymu
+            order.save()
             formset.instance = order
-            formset.save()  # Išsaugo visas eilutes vienu metu
-
-            return redirect('my-orders')  # Grįžtame į sąrašą
+            formset.save()
+            return redirect('my-orders')
     else:
-        # 4. Jei vartotojas tik užėjo į puslapį (GET)
         form = OrderCreateForm()
         formset = OrderLineFormSet()
 
-    # 5. Nusiunčiame abi formas į HTML šabloną
     return render(request, 'order_form_with_lines.html', {
         'form': form,
         'formset': formset
+    })
+
+
+@login_required
+def update_order(request, pk):
+    order = get_object_or_404(Order, pk=pk, client=request.user)
+
+    if request.method == "POST":
+        form = OrderCreateForm(request.POST, instance=order)
+        formset = OrderLineFormSet(request.POST, instance=order)
+
+        if form.is_valid() and formset.is_valid():
+            form.save()
+            formset.save()
+            print("VALIO! IŠSAUGOJOME!")
+            return redirect('my-orders')
+        else:
+            # JEI FORMOS BLOGOS, klaidas spausdiname ČIA
+            print("FORMA NETEISINGA:")
+            print(form.errors)
+            print(formset.errors)
+    else:
+        # Kai tiesiog užeiname į puslapį
+        form = OrderCreateForm(instance=order)
+        formset = OrderLineFormSet(instance=order)
+
+    return render(request, 'order_form_with_lines.html', {
+        'form': form,
+        'formset': formset,
+        'order': order  # Pridėjau 'order', kad šablonas žinotų, ką redaguojame
     })
