@@ -8,7 +8,7 @@ from django.urls import reverse_lazy
 from django.views.generic import DetailView
 from django.db.models import Q
 from django.views.generic.edit import FormMixin
-from .forms import OrderReviewForm, UserUpdateForm, ProfileUpdateForm
+from .forms import OrderReviewForm, UserUpdateForm, ProfileUpdateForm, OrderCreateForm
 from .models import Car, Service, Order, OrderLine
 from django.views import generic
 
@@ -133,3 +133,13 @@ def profile(request):
         'p_form': p_form,
     }
     return render(request, template_name="profile.html", context=context)
+
+class OrderCreateView(LoginRequiredMixin, generic.CreateView):
+    model = Order
+    template_name = 'order_form.html'
+    form_class = OrderCreateForm
+    success_url = reverse_lazy('my-orders')
+
+    def form_valid(self, form):
+        form.instance.client = self.request.user
+        return super().form_valid(form)

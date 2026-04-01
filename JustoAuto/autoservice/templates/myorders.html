@@ -5,6 +5,9 @@
 {% block heading %} Mano užsakymai {% endblock %}
 
 {% block content %}
+<a href="{% url 'order-create' %}" class="btn btn-primary" style="margin-bottom: 20px; display: inline-block;">
+    + Naujas užsakymas
+</a>
   <div style="list-style-type: none; padding-left: 0;">
     {% for order in orders %}
       <div class="order-item" style="margin-bottom: 20px;">
