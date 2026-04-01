@@ -22,10 +22,13 @@
         <div><strong>Statusas:</strong> {{ order.get_status_display }}</div>
 
         <div style="margin-top: 10px;">
-            <a href="{% url 'order-update' order.id %}" class="btn btn-sm btn-outline-secondary">
-                Redaguoti užsakymą
-            </a>
+            <div style="margin-top: 10px;">
+                <a href="{% url 'order-update' order.id %}" class="btn btn-sm btn-outline-secondary">Redaguoti</a>
 
+                <a href="{% url 'order-delete' order.id %}" class="btn btn-sm btn-danger">
+                    Ištrinti
+                </a>
+            </div>
             <a href="{% url 'order-detail' order.id %}" class="btn btn-sm btn-link">
                 Peržiūrėti detales →
             </a>

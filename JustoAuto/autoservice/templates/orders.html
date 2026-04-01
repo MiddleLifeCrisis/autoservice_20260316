@@ -12,7 +12,7 @@
   <ul>
     {% for order in orders %}
       <li>
-        Užsakymas: <a href="{{ order.id }}">{{ order.date }}</a>
+        Užsakymas: <a href="{{ order.id }}">{{ order.date }} | {{ order.car }}</a>
         <p> <b>Užsakymo kaina:</b> {{ order.total_cost }}</p>
       </li>
     {% endfor %}

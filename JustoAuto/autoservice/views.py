@@ -153,3 +153,12 @@ class OrderUpdateView(LoginRequiredMixin, generic.UpdateView):
     def get_queryset(self):
         # Užtikriname, kad vartotojas rastų tik SAVO užsakymus
         return Order.objects.filter(client=self.request.user)
+
+class OrderDeleteView(LoginRequiredMixin, generic.DeleteView):
+    model = Order
+    template_name = 'order_confirm_delete.html' # Reikės patvirtinimo puslapio
+    success_url = reverse_lazy('my-orders')
+
+    def get_queryset(self):
+        # Leidžiame trinti tik tuos užsakymus, kurie priklauso šiam vartotojui
+        return Order.objects.filter(client=self.request.user)

@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>Ištrinti užsakymą</h1>
+    <p>Ar tikrai norite ištrinti užsakymą: <strong>{{ object.car }}</strong>?</p>
+
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger">Taip, ištrinti</button>
+        <a href="{% url 'my-orders' %}" class="btn btn-secondary">Atšaukti</a>
+    </form>
+{% endblock %}
