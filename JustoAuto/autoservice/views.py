@@ -143,3 +143,13 @@ class OrderCreateView(LoginRequiredMixin, generic.CreateView):
     def form_valid(self, form):
         form.instance.client = self.request.user
         return super().form_valid(form)
+
+class OrderUpdateView(LoginRequiredMixin, generic.UpdateView):
+    model = Order
+    form_class = OrderCreateForm  # Tavo forma su date picker'iu
+    template_name = 'order_form.html'  # Galime naudoti tą patį HTML kaip ir kūrimui
+    success_url = reverse_lazy('my-orders')
+
+    def get_queryset(self):
+        # Užtikriname, kad vartotojas rastų tik SAVO užsakymus
+        return Order.objects.filter(client=self.request.user)

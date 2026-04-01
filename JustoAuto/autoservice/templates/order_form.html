@@ -1,11 +1,15 @@
 {% extends 'base.html' %}
+{% load crispy_forms_tags %}
 
 {% block content %}
-  <h1>Sukurti naują užsakymą</h1>
+  <h1>{% if object %}Redaguoti užsakymą{% else %}Sukurti naują užsakymą{% endif %}</h1>
+
   <form method="post">
     {% csrf_token %}
-    {{ form.as_p }} <button type="submit" class="btn btn-success">Pateikti užsakymą</button>
+    {{ form|crispy }}
+    <button type="submit" class="btn btn-success">Išsaugoti pakeitimus</button>
   </form>
+
   <br>
   <a href="{% url 'my-orders' %}">Atšaukti</a>
 {% endblock %}

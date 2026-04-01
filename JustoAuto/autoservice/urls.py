@@ -15,6 +15,7 @@ urlpatterns = [
     path("profile/", views.UserUpdateView.as_view(), name="profile"),
     path("profile/", views.profile, name="profile"),
     path('orders/new/', views.OrderCreateView.as_view(), name='order-create'),
-path('myorders/', views.MyOrderInstanceListView.as_view(), name='my-orders'), # <--- Svarbu šis 'name'
+    path('myorders/', views.MyOrderInstanceListView.as_view(), name='my-orders'), # <--- Svarbu šis 'name'
+    path('orders/<int:pk>/update/', views.OrderUpdateView.as_view(), name='order-update'),
 ]
 

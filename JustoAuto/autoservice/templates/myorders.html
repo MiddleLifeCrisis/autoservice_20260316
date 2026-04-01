@@ -8,23 +8,33 @@
 <a href="{% url 'order-create' %}" class="btn btn-primary" style="margin-bottom: 20px; display: inline-block;">
     + Naujas užsakymas
 </a>
-  <div style="list-style-type: none; padding-left: 0;">
+
+<div style="list-style-type: none; padding-left: 0;">
     {% for order in orders %}
-      <div class="order-item" style="margin-bottom: 20px;">
-        <div class="order-item" style="margin-bottom: 20px; border: 1px solid #eee; padding: 15px;">
+      <div class="order-item" style="margin-bottom: 20px; border: 1px solid #eee; padding: 15px; border-radius: 5px;">
         <div>
-          <strong>Užsakymas:</strong>
+          <strong>Automobilis:</strong>
           <a href="{% url 'order-detail' order.id %}" style="text-decoration: none; color: #007bff; font-weight: bold;">
-            {{ order.car }} (Peržiūrėti detales →)
+            {{ order.car }}
           </a>
         </div>
         <div><strong>Data:</strong> {{ order.date }}</div>
         <div><strong>Statusas:</strong> {{ order.get_status_display }}</div>
 
-        <hr style="border: 0; border-top: 1px solid #ccc; margin-top: 10px;">
+        <div style="margin-top: 10px;">
+            <a href="{% url 'order-update' order.id %}" class="btn btn-sm btn-outline-secondary">
+                Redaguoti užsakymą
+            </a>
+
+            <a href="{% url 'order-detail' order.id %}" class="btn btn-sm btn-link">
+                Peržiūrėti detales →
+            </a>
+        </div>
+
+        <hr style="border: 0; border-top: 1px solid #ccc; margin-top: 15px;">
       </div>
     {% empty %}
       <p>Jūs dar neturite jokių užsakymų.</p>
     {% endfor %}
-  </div>
+</div>
 {% endblock %}
