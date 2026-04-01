@@ -8,7 +8,7 @@ from django.urls import reverse_lazy
 from django.views.generic import DetailView
 from django.db.models import Q
 from django.views.generic.edit import FormMixin
-from .forms import OrderReviewForm, UserUpdateForm, ProfileUpdateForm, OrderCreateForm
+from .forms import OrderReviewForm, UserUpdateForm, ProfileUpdateForm, OrderCreateForm, OrderLineFormSet
 from .models import Car, Service, Order, OrderLine
 from django.views import generic
 
@@ -162,3 +162,34 @@ class OrderDeleteView(LoginRequiredMixin, generic.DeleteView):
     def get_queryset(self):
         # Leidžiame trinti tik tuos užsakymus, kurie priklauso šiam vartotojui
         return Order.objects.filter(client=self.request.user)
+
+
+def create_order(request):
+    # 1. Patikriname, ar vartotojas paspaudė "Išsaugoti" (POST)
+    if request.method == "POST":
+        form = OrderCreateForm(request.POST)  # Pagrindinė forma (mašina, data)
+        formset = OrderLineFormSet(request.POST)  # Eilučių rinkinys (paslaugos, kiekiai)
+
+        # 2. Tikriname, ar abi formos užpildytos teisingai
+        if form.is_valid() and formset.is_valid():
+            # Išsaugome užsakymą, bet dar nesiunčiame į DB (commit=False)
+            order = form.save(commit=False)
+            # Priskiriame prisijungusį vartotoją kaip klientą
+            order.client = request.user
+            order.save()  # DABAR užsakymas įrašytas ir gavo savo ID
+
+            # 3. Svarbiausia dalis: susiejame eilutes su šiuo konkrečiu užsakymu
+            formset.instance = order
+            formset.save()  # Išsaugo visas eilutes vienu metu
+
+            return redirect('my-orders')  # Grįžtame į sąrašą
+    else:
+        # 4. Jei vartotojas tik užėjo į puslapį (GET)
+        form = OrderCreateForm()
+        formset = OrderLineFormSet()
+
+    # 5. Nusiunčiame abi formas į HTML šabloną
+    return render(request, 'order_form_with_lines.html', {
+        'form': form,
+        'formset': formset
+    })
